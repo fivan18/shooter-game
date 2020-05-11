@@ -102,11 +102,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scr
 /*!***********************************!*\
   !*** ./src/scripts/moduleTest.js ***!
   \***********************************/
-/*! exports provided: test */
+/*! exports provided: test, sum */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"test\", function() { return test; });\nfunction test() {\n  document.querySelector('.container').innerHTML = 'Hello world';\n}\n\n\n\n//# sourceURL=webpack:///./src/scripts/moduleTest.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"test\", function() { return test; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"sum\", function() { return sum; });\nfunction test() {\n  document.querySelector('.container').innerHTML = 'Hello world';\n}\n\nfunction sum(a, b) {\n  return a + b;\n}\n\n\n\n//# sourceURL=webpack:///./src/scripts/moduleTest.js?");
 
 /***/ })
 

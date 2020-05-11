@@ -2,4 +2,8 @@ function test() {
   document.querySelector('.container').innerHTML = 'Hello world';
 }
 
-export { test };
+function sum(a, b) {
+  return a + b;
+}
+
+export { test, sum };
