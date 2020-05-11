@@ -90,10 +90,23 @@
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("function test() {\n  document.querySelector('.container').innerHTML = 'Hello world';\n}\n\n\ntest();\n\n//# sourceURL=webpack:///./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scripts_moduleTest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/moduleTest */ \"./src/scripts/moduleTest.js\");\n\n\n\nObject(_scripts_moduleTest__WEBPACK_IMPORTED_MODULE_0__[\"test\"])();\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/moduleTest.js":
+/*!***********************************!*\
+  !*** ./src/scripts/moduleTest.js ***!
+  \***********************************/
+/*! exports provided: test */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"test\", function() { return test; });\nfunction test() {\n  document.querySelector('.container').innerHTML = 'Hello world';\n}\n\n\n\n//# sourceURL=webpack:///./src/scripts/moduleTest.js?");
 
 /***/ })
 

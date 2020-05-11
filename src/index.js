@@ -1,6 +1,4 @@
-function test() {
-  document.querySelector('.container').innerHTML = 'Hello world';
-}
+import { test } from './scripts/moduleTest'
 
 
 test();
