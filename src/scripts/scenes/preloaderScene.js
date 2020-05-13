@@ -2,6 +2,9 @@ import 'phaser';
 import blueButton1 from "../../assets/images/ui/blue_button02.png";
 import blueButton2 from "../../assets/images/ui/blue_button03.png";
 import phaserLogo from "../../assets/images/logo.png";
+import box from '../../assets/images/ui/grey_box.png';
+import checkBox from '../../assets/images/ui/blue_boxCheckmark.png';
+import townTheme from '../../assets/audio/TownTheme.mp3';
  
 export default class PreloaderScene extends Phaser.Scene {
   constructor () {
@@ -94,6 +97,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton1', blueButton1);
     this.load.image('blueButton2', blueButton2);
     this.load.image('phaserLogo', phaserLogo);
+    this.load.image('phaserLogo', 'assets/logo.png');
+    this.load.image('box', box);
+    this.load.image('checkedBox', checkBox);
+    this.load.audio('bgMusic', [townTheme]);
   }
  
   create () {
