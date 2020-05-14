@@ -1,7 +1,7 @@
 {
   "name": "shooter-game",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a shooter game demo",
   "private": true,
   "scripts": {
     "test": "jest"
@@ -10,8 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/fivan18/shooter-game.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "heroku"
+  ],
+  "author": "Ivan Guzman",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/fivan18/shooter-game/issues"
@@ -34,5 +36,8 @@
   },
   "dependencies": {
     "phaser": "^3.23.0"
+  },
+  "engines": {
+    "node": "13.x"
   }
 }
