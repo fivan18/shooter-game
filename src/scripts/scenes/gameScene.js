@@ -117,6 +117,7 @@ export default class GameScene extends Phaser.Scene {
     this.enemyLasers = this.add.group();
     this.playerLasers = this.add.group();
 
+    // spawn event
     this.time.addEvent({
       delay: 2000,
       callback: function() {
@@ -155,31 +156,58 @@ export default class GameScene extends Phaser.Scene {
       callbackScope: this,
       loop: true
     });
+
+    this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
+      if (enemy) {
+        if (enemy.onDestroy !== undefined) {
+          enemy.onDestroy();
+        }
+      
+        enemy.explode(true);
+        playerLaser.destroy();
+      }
+    });
+
+    this.physics.add.overlap(this.player, this.enemies, function(player, enemy) {
+      if (!player.getData("isDead") &&
+          !enemy.getData("isDead")) {
+        player.explode(false);
+        enemy.explode(true);
+      }
+    });
+
+    this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
+      if (!player.getData("isDead") &&
+          !laser.getData("isDead")) {
+        player.explode(false);
+        laser.destroy();
+      }
+    });
   }
 
   update() {
-    this.player.update();
-
-    if (this.keyW.isDown) {
-      this.player.moveUp();
-    }
-    else if (this.keyS.isDown) {
-      this.player.moveDown();
-    }
-
-    if (this.keyA.isDown) {
-      this.player.moveLeft();
-    }
-    else if (this.keyD.isDown) {
-      this.player.moveRight();
-    }
-
-    if (this.keySpace.isDown) {
-      this.player.setData("isShooting", true);
-    }
-    else {
-      this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
-      this.player.setData("isShooting", false);
+    if (!this.player.getData("isDead")) {
+      this.player.update();
+      if (this.keyW.isDown) {
+        this.player.moveUp();
+      }
+      else if (this.keyS.isDown) {
+        this.player.moveDown();
+      }
+      if (this.keyA.isDown) {
+        this.player.moveLeft();
+      }
+      else if (this.keyD.isDown) {
+        this.player.moveRight();
+      }
+    
+      if (this.keySpace.isDown) {
+        this.player.setData("isShooting", true);
+      }
+      else {
+        this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
+        this.player.setData("isShooting", false);
+      }
     }
 
     for (let i = 0; i < this.enemies.getChildren().length; i++) {
