@@ -4,7 +4,8 @@
   "description": "This is a shooter game demo",
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "npx http-server ./dist"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "http-server": "^0.12.3",
     "phaser": "^3.23.0"
   },
   "engines": {
