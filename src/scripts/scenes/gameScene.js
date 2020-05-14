@@ -1,5 +1,5 @@
 import 'phaser';
-import { Player } from '../objects/entitties';
+import { Player, ChaserShip, GunShip, CarrierShip } from '../objects/entitties';
 import sprBg0 from "../../assets/images/sprBg0.png";
 import sprBg1 from "../../assets/images/sprBg1.png";
 import sprExplosion from "../../assets/images/sprExplosion.png";
@@ -16,6 +16,17 @@ import sndLaser from "../../assets/audio/sndLaser.wav";
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('Game');
+  }
+
+  getEnemiesByType(type) {
+    var arr = [];
+    for (var i = 0; i < this.enemies.getChildren().length; i++) {
+      var enemy = this.enemies.getChildren()[i];
+      if (enemy.getData("type") == type) {
+        arr.push(enemy);
+      }
+    }
+    return arr;
   }
  
   preload () {
@@ -101,6 +112,49 @@ export default class GameScene extends Phaser.Scene {
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+    this.enemies = this.add.group();
+    this.enemyLasers = this.add.group();
+    this.playerLasers = this.add.group();
+
+    this.time.addEvent({
+      delay: 2000,
+      callback: function() {
+        var enemy = null;
+
+        if (Phaser.Math.Between(0, 10) >= 3) {
+          enemy = new GunShip(
+            this,
+            Phaser.Math.Between(0, this.game.config.width),
+            0
+          );
+        }
+        else if (Phaser.Math.Between(0, 10) >= 5) {
+          if (this.getEnemiesByType("ChaserShip").length < 5) {
+    
+            enemy = new ChaserShip(
+              this,
+              Phaser.Math.Between(0, this.game.config.width),
+              0
+            );
+          }
+        }
+        else {
+          enemy = new CarrierShip(
+            this,
+            Phaser.Math.Between(0, this.game.config.width),
+            0
+          );
+        }
+    
+        if (enemy !== null) {
+          enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+          this.enemies.add(enemy);
+        }
+      },
+      callbackScope: this,
+      loop: true
+    });
   }
 
   update() {
@@ -119,5 +173,11 @@ export default class GameScene extends Phaser.Scene {
     else if (this.keyD.isDown) {
       this.player.moveRight();
     }
-  }
+
+    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+      let enemy = this.enemies.getChildren()[i];
+
+      enemy.update();
+    }
+  } 
 };
