@@ -1,5 +1,5 @@
 import 'phaser';
-import { Player, ChaserShip, GunShip, CarrierShip } from '../objects/entitties';
+import { Player, ChaserShip, GunShip, CarrierShip, ScrollingBackground } from '../objects/entitties';
 import sprBg0 from "../../assets/images/sprBg0.png";
 import sprBg1 from "../../assets/images/sprBg1.png";
 import sprExplosion from "../../assets/images/sprExplosion.png";
@@ -89,8 +89,6 @@ export default class GameScene extends Phaser.Scene {
       repeat: -1
     });
 
-
-
     this.sfx = {
       explosions: [
         this.sound.add("sndExplode0"),
@@ -98,6 +96,12 @@ export default class GameScene extends Phaser.Scene {
       ],
       laser: this.sound.add("sndLaser")
     };
+
+    this.backgrounds = [];
+    for (var i = 0; i < 4; i++) { // create five scrolling backgrounds
+      var bg = new ScrollingBackground(this, "sprBg0", i * 10);
+      this.backgrounds.push(bg);
+    }
 
     // import player entity
     this.player = new Player(
@@ -256,6 +260,10 @@ export default class GameScene extends Phaser.Scene {
           laser.destroy();
         }
       }
+    }
+
+    for (var i = 0; i < this.backgrounds.length; i++) {
+      this.backgrounds[i].update();
     }
   } 
 };
