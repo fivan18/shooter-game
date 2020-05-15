@@ -1,5 +1,5 @@
 import 'phaser';
-import { Player, ChaserShip, GunShip, CarrierShip, ScrollingBackground } from '../objects/entitties';
+import { Player, ChaserShip, GunShip, ScrollingBackground } from '../objects/entitties';
 import sprBg0 from "../../assets/images/sprBg0.png";
 import sprBg1 from "../../assets/images/sprBg1.png";
 import sprExplosion from "../../assets/images/sprExplosion.png";
@@ -120,53 +120,48 @@ export default class GameScene extends Phaser.Scene {
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
     this.playerLasers = this.add.group();
+    
 
     // spawn event
     this.time.addEvent({
       delay: 2000,
       callback: function() {
-        var enemy = null;
-
-        if (Phaser.Math.Between(0, 10) >= 3) {
-          enemy = new GunShip(
-            this,
-            Phaser.Math.Between(0, this.game.config.width),
-            0
-          );
-        }
-        else if (Phaser.Math.Between(0, 10) >= 5) {
-          if (this.getEnemiesByType("ChaserShip").length < 5) {
-    
-            enemy = new ChaserShip(
-              this,
-              Phaser.Math.Between(0, this.game.config.width),
-              0
-            );
-          }
-        }
-        else {
-          enemy = new CarrierShip(
-            this,
-            Phaser.Math.Between(0, this.game.config.width),
-            0
-          );
-        }
-    
-        if (enemy !== null) {
-          enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
-          this.enemies.add(enemy);
-        }
+        let enemy = new ChaserShip(
+          this,
+          Phaser.Math.Between(0, this.game.config.width),
+          0
+        );
+        enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+        this.enemies.add(enemy);
       },
       callbackScope: this,
       loop: true
     });
 
+    let enemyRigth = new GunShip(
+      this,
+      this.game.config.width - 10,
+      0,
+      90
+    );
+    enemyRigth.setScale(Phaser.Math.Between(10, 20) * 0.1);
+    this.enemies.add(enemyRigth);
+
+    let enemyLeft = new GunShip(
+      this,
+      10,
+      this.game.config.height,
+      270
+    );
+    enemyLeft.setScale(Phaser.Math.Between(10, 20) * 0.1);
+    this.enemies.add(enemyLeft);
+
+    // collide and overlap
     this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
       if (enemy) {
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
-      
         enemy.explode(true);
         playerLaser.destroy();
       }
@@ -216,25 +211,14 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
-    for (let i = 0; i < this.enemies.getChildren().length; i++) {
-      let enemy = this.enemies.getChildren()[i];
+    this.enemies.getChildren().forEach((enemy) => {
       enemy.update();
-
-      if (enemy.x < -enemy.displayWidth ||
-        enemy.x > this.game.config.width + enemy.displayWidth ||
-        enemy.y < -enemy.displayHeight * 4 ||
-        enemy.y > this.game.config.height + enemy.displayHeight) {
-    
-        if (enemy) {
-          if (enemy.onDestroy !== undefined) {
-            enemy.onDestroy();
-          }
-    
-          enemy.destroy();
-        }
-    
+      if (enemy.y < 0) {
+        enemy.body.velocity.y = 100; 
+      } else if(enemy.y > this.game.config.height){
+        enemy.body.velocity.y = -100;
       }
-    }
+    }, this);
 
     for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
       var laser = this.enemyLasers.getChildren()[i];

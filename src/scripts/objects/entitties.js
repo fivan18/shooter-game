@@ -42,6 +42,13 @@ class Entity extends Phaser.GameObjects.Sprite {
   }
 }
 
+class PlayerLaser extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, "sprLaserPlayer");
+    this.body.velocity.y = -200;
+  }
+}
+
 class Player extends Entity {
   constructor(scene, x, y, key) {
     super(scene, x, y, key, "Player");
@@ -101,17 +108,48 @@ class Player extends Entity {
   }
 }
 
-class PlayerLaser extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprLaserPlayer");
-    this.body.velocity.y = -200;
+class EnemyLaser extends Entity {
+  constructor(scene, x, y, angle) {
+    super(scene, x, y, "sprLaserEnemy0");
+    this.angle = angle;
+    if(this.angle === 90) {
+      this.body.velocity.x = -200;
+    } else {
+      this.body.velocity.x = 200;
+    }
+    
   }
 }
 
-class EnemyLaser extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprLaserEnemy0");
-    this.body.velocity.y = 200;
+class GunShip extends Entity {
+  constructor(scene, x, y, angle) {
+    super(scene, x, y, "sprEnemy0", "GunShip");
+    this.play("sprEnemy0");
+    this.body.velocity.y = 100;//Phaser.Math.Between(50, 100);
+    this.angle = angle;
+    this.shootTimer = this.scene.time.addEvent({
+      delay: 1000,
+      callback: function() {
+        var laser = new EnemyLaser(
+          this.scene,
+          this.x,
+          this.y,
+          this.angle
+        );
+        laser.setScale(this.scaleX);
+        this.scene.enemyLasers.add(laser);
+      },
+      callbackScope: this,
+      loop: true
+    });
+  }
+
+  onDestroy() {
+    if (this.shootTimer !== undefined) {
+      if (this.shootTimer) {
+        this.shootTimer.remove(false);
+      }
+    }
   }
 }
 
@@ -161,43 +199,13 @@ class ChaserShip extends Entity {
   }
 }
 
-class GunShip extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy0", "GunShip");
-    this.play("sprEnemy0");
-    this.body.velocity.y = Phaser.Math.Between(50, 100);
-    this.shootTimer = this.scene.time.addEvent({
-      delay: 1000,
-      callback: function() {
-        var laser = new EnemyLaser(
-          this.scene,
-          this.x,
-          this.y
-        );
-        laser.setScale(this.scaleX);
-        this.scene.enemyLasers.add(laser);
-      },
-      callbackScope: this,
-      loop: true
-    });
-  }
-
-  onDestroy() {
-    if (this.shootTimer !== undefined) {
-      if (this.shootTimer) {
-        this.shootTimer.remove(false);
-      }
-    }
-  }
-}
-
-class CarrierShip extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy2", "CarrierShip");
-    this.play("sprEnemy2");
-    this.body.velocity.y = Phaser.Math.Between(50, 100);
-  }
-}
+// class CarrierShip extends Entity {
+//   constructor(scene, x, y) {
+//     super(scene, x, y, "sprEnemy2", "CarrierShip");
+//     this.play("sprEnemy2");
+//     this.body.velocity.y = Phaser.Math.Between(50, 100);
+//   }
+// }
 
 class ScrollingBackground {
   constructor(scene, key, velocityY) {
@@ -241,4 +249,6 @@ class ScrollingBackground {
 
 }
 
-export { Player, ChaserShip, GunShip, CarrierShip, EnemyLaser, ScrollingBackground };
+// export { Player, ChaserShip, GunShip, CarrierShip, EnemyLaser, ScrollingBackground };
+
+export { Player, GunShip, ChaserShip, EnemyLaser, ScrollingBackground };
