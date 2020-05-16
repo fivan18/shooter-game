@@ -45,7 +45,19 @@ export default class Model {
     return this._score;
   }
 
-  async save() {
-    
+  save() {
+    this.api.save(this._score);
+  }
+
+  async apiScore(playerName){
+    const scores = await this.api.retrieve();
+    let maxScore = 1;
+    const playerScores = scores.filter(score => score.name === playerName)
+          .map(score => score.score);
+    return Math.max(...playerScores, maxScore);
+  }
+
+  localScore() {
+    return this.local.value;
   }
 }

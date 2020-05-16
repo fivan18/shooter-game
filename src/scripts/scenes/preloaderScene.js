@@ -18,7 +18,11 @@ export default class PreloaderScene extends Phaser.Scene {
   ready () {
     this.readyCount++;
     if (this.readyCount === 2) {
-      this.scene.start('Authentication');
+      if(this.sys.game.globals.playerName) {
+        this.scene.start('Title');
+      } else {
+        this.scene.start('Authentication');
+      }
     }
   }
 
@@ -101,6 +105,22 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('box', box);
     this.load.image('checkedBox', checkBox);
     this.load.audio('bgMusic', [townTheme]);
+
+    // get player name and syncronize scores if there is something in the localStorage
+    if(this.sys.game.globals.model.localScore()) {
+      const globals = this.sys.game.globals;
+      globals.model.score = globals.model.localScore();
+      globals.playerName = globals.model.score.name;
+
+      globals.model.apiScore(globals.playerName).
+        then(score => {
+          if (score > globals.model.score.score) {
+            globals.model.score = { score, name: globals.playerName };
+          } else if (globals.model.score.score > score) {
+            globals.model.save();
+          }
+        });
+    }
   }
  
   create () {
