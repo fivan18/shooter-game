@@ -20,9 +20,12 @@ export default class ApiStorage {
   }
 
   async save(score) {
-    const init = {  method: 'POST',
-                    body: score,
-                    mode: 'cors'};
+    const init = {
+      method: 'POST', 
+      mode: 'cors', 
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+      body: JSON.stringify(score)
+    };
     const message = await this.request(init);
     return message;
   }
@@ -30,7 +33,7 @@ export default class ApiStorage {
   async retrieve() {
     const init = {  method: 'GET',
                     mode: 'cors'};
-    const scores = await this.request(init)                   
-    return scores;
+    const scores = await this.request(init)                
+    return scores.result;
   }
 }

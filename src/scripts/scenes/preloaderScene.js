@@ -110,12 +110,12 @@ export default class PreloaderScene extends Phaser.Scene {
     if(this.sys.game.globals.model.localScore()) {
       const globals = this.sys.game.globals;
       globals.model.score = globals.model.localScore();
-      globals.playerName = globals.model.score.name;
+      globals.playerName = globals.model.score.user;
 
       globals.model.apiScore(globals.playerName).
         then(score => {
           if (score > globals.model.score.score) {
-            globals.model.score = { score, name: globals.playerName };
+            globals.model.score = { score, user: globals.playerName };
           } else if (globals.model.score.score > score) {
             globals.model.save();
           }

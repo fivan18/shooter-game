@@ -36,6 +36,7 @@ export default class Model {
     return this._bgMusicPlaying;
   }
 
+  // instance score, paired with local storage
   set score(s) {
     this._score = s;
     this.local.value = s;
@@ -45,19 +46,28 @@ export default class Model {
     return this._score;
   }
 
-  save() {
-    this.api.save(this._score);
+  localScore() {
+    return this.local.value;
   }
 
+  // only api storage
   async apiScore(playerName){
     const scores = await this.api.retrieve();
     let maxScore = 1;
-    const playerScores = scores.filter(score => score.name === playerName)
+    const playerScores = scores.filter(score => score.user === playerName)
           .map(score => score.score);
     return Math.max(...playerScores, maxScore);
   }
 
-  localScore() {
-    return this.local.value;
+  save() {
+    const user = this._score.user;
+    const instanceScore = this._score.score;
+    this.api.retrieve()
+      .then(scores => {
+        const exist = scores.some(score => score.user === user && score.score === instanceScore);
+        if(!exist) {
+          this.api.save(this._score);
+        }
+      });
   }
 }

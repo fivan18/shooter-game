@@ -8,6 +8,10 @@ export default class AuthenticationScene extends Phaser.Scene {
  
   preload () {
   }
+
+  validateName(name){
+    return (/^[a-z]+$/g).test(name);
+  }
  
   create () {
     var printText = this.add.text(400, 200, '', {
@@ -24,13 +28,23 @@ export default class AuthenticationScene extends Phaser.Scene {
     })
     .resize(100, 100)
     .setOrigin(0.5)
-    .on('textchange', function (inputText) {
-      //printText.text = inputText.text;
-      console.log('testChange');
+    .on('textchange', inputText => {
+      if(this.validateName(inputText.text)) {
+        printText.text = 'Valid name';
+      } else {
+        printText.text = 'Your name is invalid: upercase characters [a-z] and more than one please';
+      }
     });
 
-    this.input.keyboard.addKey('ENTER').on('down', function (event) {
-      printText.text = inputText.text;
+    this.input.keyboard.addKey('ENTER').on('down', event => {
+      if(this.validateName(inputText.text.trim())) {
+        const globals = this.sys.game.globals;
+        globals.playerName = inputText.text.trim();
+        globals.model.score = { score: 1, user: globals.playerName };
+        globals.model.save();
+
+        this.scene.start('Title');
+      }
     });
   }
 
