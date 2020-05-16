@@ -43,6 +43,16 @@ export default class AuthenticationScene extends Phaser.Scene {
         globals.model.score = { score: 1, user: globals.playerName };
         globals.model.save();
 
+        // syncronize scores 
+        globals.model.apiScore(globals.playerName).
+        then(score => {
+          if (score > globals.model.score.score) {
+            globals.model.score = { score, user: globals.playerName };
+          } else if (globals.model.score.score > score) {
+            globals.model.save();
+          }
+        });
+
         this.scene.start('Title');
       }
     });
