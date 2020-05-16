@@ -80,6 +80,13 @@ class Player extends Entity {
     this.scene.time.addEvent({ // go to game over scene
       delay: 1000,
       callback: function() {
+        const globals = this.scene.sys.game.globals;
+        if(this.scene.score > globals.model.score.score) {
+          globals.model.score = { score: this.scene.score, user: globals.model.score.user };
+          globals.model.save();
+        }
+        globals.currentScore = this.scene.score;
+        this.scene.score = 1;
         this.scene.scene.start("GameOver");
       },
       callbackScope: this,

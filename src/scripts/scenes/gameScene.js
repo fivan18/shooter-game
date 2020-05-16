@@ -16,6 +16,7 @@ import sndLaser from "../../assets/audio/sndLaser.wav";
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('Game');
+    this.score = 1;
   }
 
   getEnemiesByType(type) {
@@ -183,6 +184,25 @@ export default class GameScene extends Phaser.Scene {
         player.onDestroy();
         laser.destroy();
       }
+    });
+
+    // Score 
+    this.currentScore = this.add.text(16, 16, "Score: 1", {
+      fontFamily: 'monospace',
+      fontSize: 20,
+      fontStyle: 'bold',
+      color: '#ffffff',
+      align: 'center'
+    });
+    this.currentScore.setOrigin(0);
+    this.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.score += 1;
+        this.currentScore.setText('Score: ' + this.score);
+      },
+      callbackScope: this,
+      loop: true
     });
   }
 
