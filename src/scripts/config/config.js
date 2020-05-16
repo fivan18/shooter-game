@@ -2,7 +2,6 @@ import 'phaser';
  
 export default {
   type: Phaser.AUTO,
-  parent: 'phaser-example',
   width: 800,
   height: 600,
   backgroundColor: "black",
@@ -13,5 +12,11 @@ export default {
     }
   },
   pixelArt: true,
-  roundPixels: true
+  roundPixels: true,
+
+  //config for input plugin
+  parent: 'phaser-example',
+  dom: {
+      createContainer: true
+  }
 };

@@ -37,7 +37,8 @@
   },
   "dependencies": {
     "http-server": "^0.12.3",
-    "phaser": "^3.23.0"
+    "phaser": "^3.23.0",
+    "phaser3-rex-plugins": "^1.1.14"
   },
   "engines": {
     "node": "13.x"
