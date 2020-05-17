@@ -118,9 +118,9 @@ class Player extends Entity {
 
 class EnemyLaser extends Entity {
   constructor(scene, x, y, angle) {
-    super(scene, x, y, "sprLaserEnemy0");
-    this.angle = angle;
-    if(this.angle === 90) {
+    super(scene, x, y, "fireball");
+    this.angle = angle + 90;
+    if(angle === 90) {
       this.body.velocity.x = -200;
     } else {
       this.body.velocity.x = 200;
@@ -131,12 +131,12 @@ class EnemyLaser extends Entity {
 
 class GunShip extends Entity {
   constructor(scene, x, y, angle) {
-    super(scene, x, y, "sprEnemy0", "GunShip");
-    this.play("sprEnemy0");
+    super(scene, x, y, "cannonbobmouth", "GunShip");
+    this.play("cannonbobmouth");
     this.body.velocity.y = 100;//Phaser.Math.Between(50, 100);
     this.angle = angle;
     this.shootTimer = this.scene.time.addEvent({
-      delay: 1000,
+      delay: 2000,
       callback: function() {
         var laser = new EnemyLaser(
           this.scene,
@@ -144,7 +144,7 @@ class GunShip extends Entity {
           this.y,
           this.angle
         );
-        laser.setScale(this.scaleX);
+        laser.setScale(0.1);
         this.scene.enemyLasers.add(laser);
       },
       callbackScope: this,

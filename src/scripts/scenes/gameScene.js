@@ -3,11 +3,11 @@ import { Player, ChaserShip, GunShip, ScrollingBackground } from '../objects/ent
 import sprBg0 from "../../assets/images/sprBg0.png";
 import sprBg1 from "../../assets/images/sprBg1.png";
 import sprExplosion from "../../assets/images/sprExplosion.png";
-import sprEnemy0 from "../../assets/images/sprEnemy0.png";
-import sprLaserEnemy0 from "../../assets/images/sprLaserEnemy0.png";
+import fireball from "../../assets/images/fireball.png";
 import dodo from "../../assets/images/dodo.png";
 import egg from "../../assets/images/egg.png";
 import spikedball from "../../assets/images/spikedball.png";
+import cannonbobmouth from "../../assets/images/cannonbobmouth.png";
 import sndExplode0 from "../../assets/audio/sndExplode0.wav";
 import sndExplode1 from "../../assets/audio/sndExplode1.wav";
 import sndLaser from "../../assets/audio/sndLaser.wav";
@@ -37,12 +37,12 @@ export default class GameScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
-    this.load.spritesheet("sprEnemy0", sprEnemy0, {
+    this.load.spritesheet("cannonbobmouth", cannonbobmouth, {
       frameWidth: 16,
       frameHeight: 16
     });
     this.load.image("spikedball", spikedball);
-    this.load.image("sprLaserEnemy0", sprLaserEnemy0);
+    this.load.image("fireball", fireball);
     this.load.image("egg", egg);
     this.load.spritesheet("dodo", dodo, {
       frameWidth: 48,
@@ -58,8 +58,8 @@ export default class GameScene extends Phaser.Scene {
  
   create () {
     this.anims.create({
-      key: "sprEnemy0",
-      frames: this.anims.generateFrameNumbers("sprEnemy0"),
+      key: "cannonbobmouth",
+      frames: this.anims.generateFrameNumbers("cannonbobmouth"),
       frameRate: 20,
       repeat: -1
     });
@@ -120,7 +120,7 @@ export default class GameScene extends Phaser.Scene {
           Phaser.Math.Between(0, this.game.config.width),
           0
         );
-        enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+        enemy.setScale(Phaser.Math.Between(4, 10) * 0.1);
         this.enemies.add(enemy);
       },
       callbackScope: this,
@@ -133,7 +133,7 @@ export default class GameScene extends Phaser.Scene {
       0,
       90
     );
-    enemyRigth.setScale(Phaser.Math.Between(10, 20) * 0.1);
+    enemyRigth.setScale(1.5);
     this.enemies.add(enemyRigth);
 
     let enemyLeft = new GunShip(
@@ -142,7 +142,7 @@ export default class GameScene extends Phaser.Scene {
       this.game.config.height,
       270
     );
-    enemyLeft.setScale(Phaser.Math.Between(10, 20) * 0.1);
+    enemyLeft.setScale(1.5);
     this.enemies.add(enemyLeft);
 
     // collide and overlap
