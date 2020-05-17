@@ -44,8 +44,9 @@ class Entity extends Phaser.GameObjects.Sprite {
 
 class PlayerLaser extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "sprLaserPlayer");
-    this.body.velocity.y = -200;
+    super(scene, x + 20, y + 30, "egg");
+    this.body.velocity.y = 200;
+    this.setScale(0.5);
   }
 }
 
@@ -53,7 +54,7 @@ class Player extends Entity {
   constructor(scene, x, y, key) {
     super(scene, x, y, key, "Player");
     this.setData("speed", 200);
-    this.play("sprPlayer");
+    this.play("dodo");
 
     this.setData("isShooting", false);
     this.setData("timerShootDelay", 10);

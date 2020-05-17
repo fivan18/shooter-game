@@ -7,8 +7,8 @@ import sprEnemy0 from "../../assets/images/sprEnemy0.png";
 import sprEnemy1 from "../../assets/images/sprEnemy1.png";
 import sprEnemy2 from "../../assets/images/sprEnemy2.png";
 import sprLaserEnemy0 from "../../assets/images/sprLaserEnemy0.png";
-import sprLaserPlayer from "../../assets/images/sprLaserPlayer.png";
-import sprPlayer from "../../assets/images/sprPlayer.png";
+import dodo from "../../assets/images/dodo.png";
+import egg from "../../assets/images/egg.png";
 import sndExplode0 from "../../assets/audio/sndExplode0.wav";
 import sndExplode1 from "../../assets/audio/sndExplode1.wav";
 import sndLaser from "../../assets/audio/sndLaser.wav";
@@ -48,10 +48,10 @@ export default class GameScene extends Phaser.Scene {
       frameHeight: 16
     });
     this.load.image("sprLaserEnemy0", sprLaserEnemy0);
-    this.load.image("sprLaserPlayer", sprLaserPlayer);
-    this.load.spritesheet("sprPlayer", sprPlayer, {
-      frameWidth: 16,
-      frameHeight: 16
+    this.load.image("egg", egg);
+    this.load.spritesheet("dodo", dodo, {
+      frameWidth: 48,
+      frameHeight: 64
     });
 
 
@@ -84,8 +84,8 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "sprPlayer",
-      frames: this.anims.generateFrameNumbers("sprPlayer"),
+      key: "dodo",
+      frames: this.anims.generateFrameNumbers("dodo"),
       frameRate: 20,
       repeat: -1
     });
@@ -109,7 +109,7 @@ export default class GameScene extends Phaser.Scene {
       this,
       this.game.config.width * 0.5,
       this.game.config.height * 0.5,
-      "sprPlayer"
+      "dodo"
     );
 
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
