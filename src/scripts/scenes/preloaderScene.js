@@ -1,9 +1,9 @@
 import 'phaser';
 import blueButton1 from "../../assets/images/ui/blue_button02.png";
 import blueButton2 from "../../assets/images/ui/blue_button03.png";
-import phaserLogo from "../../assets/images/logo.png";
 import box from '../../assets/images/ui/grey_box.png';
 import checkBox from '../../assets/images/ui/blue_boxCheckmark.png';
+import backgroundGame from "../../assets/images/backgroundGame.png";
 import townTheme from '../../assets/audio/TownTheme.mp3';
  
 export default class PreloaderScene extends Phaser.Scene {
@@ -27,8 +27,20 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload () {
-    // add logo image
-    this.add.image(400, 200, 'logo');
+    // add background to this scene
+    this.add.image(0, 0, 'background')
+      .setOrigin(0, 0)
+      .setScale(2.5);
+    
+    // display game's name
+    let gameName = this.add.text(this.game.config.width * 0.5, 128, "BIRD SURVIVING", {
+      fontFamily: 'monospace',
+      fontSize: 48,
+      fontStyle: 'bold',
+      color: '#808080',
+      align: 'center'
+    });
+    gameName.setOrigin(0.5);
   
     // display progress bar
     let progressBar = this.add.graphics();
@@ -44,7 +56,7 @@ export default class PreloaderScene extends Phaser.Scene {
       text: 'Loading...',
       style: {
         font: '20px monospace',
-        fill: '#ffffff'
+        fill: '#A9A9A9'
       }
     });
     loadingText.setOrigin(0.5, 0.5);
@@ -55,7 +67,7 @@ export default class PreloaderScene extends Phaser.Scene {
       text: '0%',
       style: {
         font: '18px monospace',
-        fill: '#ffffff'
+        fill: '#A9A9A9'
       }
     });
     percentText.setOrigin(0.5, 0.5);
@@ -66,12 +78,11 @@ export default class PreloaderScene extends Phaser.Scene {
       text: '',
       style: {
         font: '18px monospace',
-        fill: '#ffffff'
+        fill: '#A9A9A9'
       }
     });
     assetText.setOrigin(0.5, 0.5);
   
-    // update progress bar
     this.load.on('progress', function (value) {
       percentText.setText(parseInt(value * 100) + '%');
       progressBar.clear();
@@ -79,34 +90,28 @@ export default class PreloaderScene extends Phaser.Scene {
       progressBar.fillRect(250, 280, 300 * value, 30);
     });
   
-    // update file progress text
     this.load.on('fileprogress', function (file) {
       assetText.setText('Loading asset: ' + file.key);
     });
   
-    // remove progress bar when complete
+    // let scene know all have been loaded
     this.load.on('complete', function () {
-      progressBar.destroy();
-      progressBox.destroy();
-      loadingText.destroy();
-      percentText.destroy();
-      assetText.destroy();
       this.ready();
     }.bind(this));
 
-    // delay to show the logo
+    // wait three seconds before continue the next scene when all have been loaded
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
   
     // load assets needed in our game
     this.load.image('blueButton1', blueButton1);
     this.load.image('blueButton2', blueButton2);
-    this.load.image('phaserLogo', phaserLogo);
-    this.load.image('phaserLogo', 'assets/logo.png');
     this.load.image('box', box);
     this.load.image('checkedBox', checkBox);
+    this.load.image('backgroundGame', backgroundGame);
     this.load.audio('bgMusic', [townTheme]);
 
-    // get player name and syncronize scores if there is something in the localStorage
+    // get player name and syncronize scores with api if there is something in the localStorage
+    //    if not we will redirect to authentication scene 
     if(this.sys.game.globals.model.localScore()) {
       const globals = this.sys.game.globals;
       globals.model.score = globals.model.localScore();
