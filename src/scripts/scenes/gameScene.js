@@ -4,11 +4,10 @@ import sprBg0 from "../../assets/images/sprBg0.png";
 import sprBg1 from "../../assets/images/sprBg1.png";
 import sprExplosion from "../../assets/images/sprExplosion.png";
 import sprEnemy0 from "../../assets/images/sprEnemy0.png";
-import sprEnemy1 from "../../assets/images/sprEnemy1.png";
-import sprEnemy2 from "../../assets/images/sprEnemy2.png";
 import sprLaserEnemy0 from "../../assets/images/sprLaserEnemy0.png";
 import dodo from "../../assets/images/dodo.png";
 import egg from "../../assets/images/egg.png";
+import spikedball from "../../assets/images/spikedball.png";
 import sndExplode0 from "../../assets/audio/sndExplode0.wav";
 import sndExplode1 from "../../assets/audio/sndExplode1.wav";
 import sndLaser from "../../assets/audio/sndLaser.wav";
@@ -42,11 +41,7 @@ export default class GameScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-    this.load.image("sprEnemy1", sprEnemy1);
-    this.load.spritesheet("sprEnemy2", sprEnemy2, {
-      frameWidth: 16,
-      frameHeight: 16
-    });
+    this.load.image("spikedball", spikedball);
     this.load.image("sprLaserEnemy0", sprLaserEnemy0);
     this.load.image("egg", egg);
     this.load.spritesheet("dodo", dodo, {
@@ -65,13 +60,6 @@ export default class GameScene extends Phaser.Scene {
     this.anims.create({
       key: "sprEnemy0",
       frames: this.anims.generateFrameNumbers("sprEnemy0"),
-      frameRate: 20,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: "sprEnemy2",
-      frames: this.anims.generateFrameNumbers("sprEnemy2"),
       frameRate: 20,
       repeat: -1
     });
