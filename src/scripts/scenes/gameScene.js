@@ -54,12 +54,6 @@ export default class GameScene extends Phaser.Scene {
       laser: this.sound.add("sndLaser")
     };
 
-    this.backgrounds = [];
-    for (var i = 0; i < 4; i++) { // create five scrolling backgrounds
-      var bg = new ScrollingBackground(this, "sprBg0", i * 10);
-      this.backgrounds.push(bg);
-    }
-
     // import player entity
     this.player = new Player(
       this,
@@ -222,10 +216,6 @@ export default class GameScene extends Phaser.Scene {
           laser.destroy();
         }
       }
-    }
-
-    for (var i = 0; i < this.backgrounds.length; i++) {
-      this.backgrounds[i].update();
     }
   } 
 };

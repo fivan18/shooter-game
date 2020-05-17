@@ -1,7 +1,5 @@
 import 'phaser';
 // gameScene
-import sprBg0 from "../../assets/images/sprBg0.png";
-import sprBg1 from "../../assets/images/sprBg1.png";
 import sprExplosion from "../../assets/images/sprExplosion.png";
 import fireball from "../../assets/images/fireball.png";
 import dodo from "../../assets/images/dodo.png";
@@ -119,8 +117,6 @@ export default class PreloaderScene extends Phaser.Scene {
   
     /* ***************************** Load assets for all the game ***************************** */
     // gameScene
-    this.load.image("sprBg0", sprBg0);
-    this.load.image("sprBg1", sprBg1);
     this.load.spritesheet("sprExplosion", sprExplosion, {
       frameWidth: 32,
       frameHeight: 32
