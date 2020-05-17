@@ -6,6 +6,12 @@ export default class TitleScene extends Phaser.Scene {
   constructor () {
     super('Title');
   }
+
+  preload() {
+    this.add.image(0, 0, 'background')
+    .setOrigin(0, 0)
+    .setScale(1);
+  }
  
   create () {
     // Game
@@ -17,7 +23,7 @@ export default class TitleScene extends Phaser.Scene {
     // Credits
     this.creditsButton = new Button(this, config.width/2, config.height/2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'Credits');
 
-    // turn on music
+    // Turn on music
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });

@@ -1,16 +1,5 @@
 import 'phaser';
 import { Player, ChaserShip, GunShip, ScrollingBackground } from '../objects/entitties';
-import sprBg0 from "../../assets/images/sprBg0.png";
-import sprBg1 from "../../assets/images/sprBg1.png";
-import sprExplosion from "../../assets/images/sprExplosion.png";
-import fireball from "../../assets/images/fireball.png";
-import dodo from "../../assets/images/dodo.png";
-import egg from "../../assets/images/egg.png";
-import spikedball from "../../assets/images/spikedball.png";
-import cannonbobmouth from "../../assets/images/cannonbobmouth.png";
-import sndExplode0 from "../../assets/audio/sndExplode0.wav";
-import sndExplode1 from "../../assets/audio/sndExplode1.wav";
-import sndLaser from "../../assets/audio/sndLaser.wav";
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -30,30 +19,9 @@ export default class GameScene extends Phaser.Scene {
   }
  
   preload () {
-    // load images
-    this.load.image("sprBg0", sprBg0);
-    this.load.image("sprBg1", sprBg1);
-    this.load.spritesheet("sprExplosion", sprExplosion, {
-      frameWidth: 32,
-      frameHeight: 32
-    });
-    this.load.spritesheet("cannonbobmouth", cannonbobmouth, {
-      frameWidth: 16,
-      frameHeight: 16
-    });
-    this.load.image("spikedball", spikedball);
-    this.load.image("fireball", fireball);
-    this.load.image("egg", egg);
-    this.load.spritesheet("dodo", dodo, {
-      frameWidth: 48,
-      frameHeight: 64
-    });
-
-
-    this.load.audio("sndExplode0", sndExplode0);
-    this.load.audio("sndExplode1", sndExplode1);
-    this.load.audio("sndLaser", sndLaser);
-
+    this.add.image(0, 0, 'backgroundGame')
+    .setOrigin(0, 0)
+    .setScale(1);
   }
  
   create () {

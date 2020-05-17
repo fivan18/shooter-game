@@ -1,10 +1,23 @@
 import 'phaser';
+// gameScene
+import sprBg0 from "../../assets/images/sprBg0.png";
+import sprBg1 from "../../assets/images/sprBg1.png";
+import sprExplosion from "../../assets/images/sprExplosion.png";
+import fireball from "../../assets/images/fireball.png";
+import dodo from "../../assets/images/dodo.png";
+import egg from "../../assets/images/egg.png";
+import spikedball from "../../assets/images/spikedball.png";
+import cannonbobmouth from "../../assets/images/cannonbobmouth.png";
+import sndExplode0 from "../../assets/audio/sndExplode0.wav";
+import sndExplode1 from "../../assets/audio/sndExplode1.wav";
+import sndLaser from "../../assets/audio/sndLaser.wav";
+// rest
 import blueButton1 from "../../assets/images/ui/blue_button02.png";
 import blueButton2 from "../../assets/images/ui/blue_button03.png";
 import box from '../../assets/images/ui/grey_box.png';
 import checkBox from '../../assets/images/ui/blue_boxCheckmark.png';
 import backgroundGame from "../../assets/images/backgroundGame.png";
-import townTheme from '../../assets/audio/TownTheme.mp3';
+import bgMusic from '../../assets/audio/bgMusic.wav';
  
 export default class PreloaderScene extends Phaser.Scene {
   constructor () {
@@ -27,11 +40,13 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload () {
+    /* ***************************** Preload for preloaderScene ***************************** */
     // add background to this scene
     this.add.image(0, 0, 'background')
       .setOrigin(0, 0)
-      .setScale(2.5);
+      .setScale(1);
     
+    /* ************************ What is displayed while all is loaded ************************ */
     // display game's name
     let gameName = this.add.text(this.game.config.width * 0.5, 128, "BIRD SURVIVING", {
       fontFamily: 'monospace',
@@ -83,33 +98,57 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     assetText.setOrigin(0.5, 0.5);
   
-    this.load.on('progress', function (value) {
+    this.load.on('progress', value => {
       percentText.setText(parseInt(value * 100) + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(250, 280, 300 * value, 30);
     });
   
-    this.load.on('fileprogress', function (file) {
+    this.load.on('fileprogress', file => {
       assetText.setText('Loading asset: ' + file.key);
     });
   
     // let scene know all have been loaded
-    this.load.on('complete', function () {
+    this.load.on('complete', () => {
       this.ready();
-    }.bind(this));
+    });
 
-    // wait three seconds before continue the next scene when all have been loaded
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
+    // wait two seconds before continue the next scene when all have been loaded
+    this.timedEvent = this.time.delayedCall(2000, this.ready, [], this);
   
-    // load assets needed in our game
+    /* ***************************** Load assets for all the game ***************************** */
+    // gameScene
+    this.load.image("sprBg0", sprBg0);
+    this.load.image("sprBg1", sprBg1);
+    this.load.spritesheet("sprExplosion", sprExplosion, {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet("cannonbobmouth", cannonbobmouth, {
+      frameWidth: 16,
+      frameHeight: 16
+    });
+    this.load.image("spikedball", spikedball);
+    this.load.image("fireball", fireball);
+    this.load.image("egg", egg);
+    this.load.spritesheet("dodo", dodo, {
+      frameWidth: 48,
+      frameHeight: 64
+    });
+    this.load.audio("sndExplode0", sndExplode0);
+    this.load.audio("sndExplode1", sndExplode1);
+    this.load.audio("sndLaser", sndLaser);
+
+    // rest
     this.load.image('blueButton1', blueButton1);
     this.load.image('blueButton2', blueButton2);
     this.load.image('box', box);
     this.load.image('checkedBox', checkBox);
     this.load.image('backgroundGame', backgroundGame);
-    this.load.audio('bgMusic', [townTheme]);
+    this.load.audio('bgMusic', [bgMusic]);
 
+    /* ********************** Check for user if exist in local storage ********************** */
     // get player name and syncronize scores with api if there is something in the localStorage
     //    if not we will redirect to authentication scene 
     if(this.sys.game.globals.model.localScore()) {
@@ -126,8 +165,5 @@ export default class PreloaderScene extends Phaser.Scene {
           }
         });
     }
-  }
- 
-  create () {
   }
 };
