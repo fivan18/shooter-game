@@ -8,6 +8,18 @@
 
 This project consisted on building a video game using JavaScript and the game Engine [Phaser](https://phaser.io/).
 
+## Content
+
+- [Built with](#built-with)
+- [Live Demo](#live-demo)
+- [GDD](#gdd)
+- [Getting Started](#getting-started)
+- [Authors](#authors)
+- [Contributing](#contributing)
+- [Show your support](#show-your-support)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
+
 ## Built With
 
 - JavaScript
@@ -119,7 +131,7 @@ $ git push heroku another-branch:master
 - Linkedin: [fivan](https://www.linkedin.com/in/fivan)
 
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues and feature requests are welcome!
 
@@ -135,6 +147,6 @@ Give a ⭐️ if you like this project!
 - 
 - 
 
-## 📝 License
+## License
 
 This project is [MIT](LICENSE) licensed.
