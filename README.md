@@ -1,19 +1,44 @@
+# Bird surviving
+
+> A game where a bird has to survive the maximum possible time.
+
+<p align="center">
+    <img src="image.png">
+</p>
+
+This project consisted on building a video game using JavaScript and the game Engine [Phaser](https://phaser.io/).
+
+## Built With
+
+- JavaScript
+- HTML
+- [Phaser](https://phaser.io/)
+- [webpack](https://webpack.js.org/)
+
+## Live Demo
+
+[https://dashboard.heroku.com/apps/limitless-sands-02774](https://dashboard.heroku.com/apps/limitless-sands-02774)
+
+## GDD
+
 ### Topic
-Space 
+
+A bird evading fireballs and exploding spikedballs with its own eggs.
 
 ### Objetive of the game
-Cross the space skiping obstacules.
+
+The bird has to survive the maximum time possible taking care not be exploded by fireballs and spikedballs.
 
 ### Mechanic
-1. Mobility: the player has the ability to move rigth, left, up and down. Crossing the space and skiping enemies bombs and lasers.
-2. Shoot: the player has the ability to shoot against enemies bombs.
-3. Scoring System: the palayer gets points every time she/he cross the space. The amount of point will be equal to 100/(number of seconds it took to cross the space).
+1. Mobility: the bird has the ability to move rigth, left, up and down. This way skipping the balls.
+2. Shoot: the bird has the ability to shoot eggs against spikedballs.
+3. Scoring System: the number of seconds the bird survive will be the score it gets.
 
 ### Entities
-- player: intergalactic ship
-- enemies: intergalactic ships and bombs
-- platform: the space, only one
-- levels: the dificulty in each level will be reflected in the number and speed of enemies lasers and the number of bombs.
+- player: the bird
+- enemies: fireballs and spikedballs
+- platform: the sky, only one
+- levels: only one, the dificulty will increase parallel the time. Icreasing the spikedballs's speed and fireball's rate
 
 ### User interactions
 Movement keys
@@ -22,15 +47,94 @@ Movement keys
 - a: left
 - d: rigth
 
-Player laser key
+Player egg shooter key
 - space
 
 ### Screens
-1. Boot
-2. Prealoader
-3. Authentication
-4. Title
-5. Options
-6. Credits
-7. Game
-8. Game Over
+1. Boot: shows the logo game
+2. Prealoader: loads assets and gets current user score if exist
+3. Authentication: if there is not a user saved on local storage, asks player name
+4. Title: gives options to start, configure or see credits game
+5. Options: configures sound
+6. Credits: shows credits
+7. Game: plays the game
+8. Game Over: shows player's current and maximum scores, asks to restart the game
+
+
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+Make sure you have installed [Node JS](https://nodejs.org/en/). If not, follow this [guide](https://www.geeksforgeeks.org/installation-of-node-js-on-linux/) for Linux or this [one](https://treehouse.github.io/installation-guides/mac/node-mac.html) for Mac OS.
+
+### Setup
+
+Download the project
+
+    $ git clone https://github.com/fivan18/shooter-game.git
+
+Install the dependencies
+
+    $ npm install
+
+### Install
+
+If you want to modify the code and see the changes on live go the project's root directory and run webpack-dev-server:
+
+    $ npx webpack-dev-server
+
+or you can run the http-server with the next command to play the game:
+
+    $ npx http-server ./dist
+
+### Usage
+
+Open the next link [http://localhost:8080/](http://localhost:8080/) and enter a player name. Happy playing!!!
+
+### Run tests
+
+### Deployment
+
+To deploy this project on heroku run the next commands:
+
+    $ heroku create
+
+if you are on `master` branch:
+
+    $ git push heroku master
+
+or if you are in `another-branch`;
+
+$ git push heroku another-branch:master
+
+
+## Authors
+
+👤 **Ivan Ulises Guzman Sanchez**
+
+- Github: [@fivan18](https://github.com/fivan18)
+- Twitter: [@fivanunam](https://twitter.com/fivanunam)
+- Linkedin: [fivan](https://www.linkedin.com/in/fivan)
+
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/fivan18/shooter-game/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- 
+- 
+- 
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.
