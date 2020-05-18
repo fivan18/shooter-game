@@ -29,7 +29,7 @@ This project consisted on building a video game using JavaScript and the game En
 
 ## Live Demo
 
-[https://dashboard.heroku.com/apps/limitless-sands-02774](https://dashboard.heroku.com/apps/limitless-sands-02774)
+[https://limitless-sands-02774.herokuapp.com/](https://limitless-sands-02774.herokuapp.com/)
 
 ## GDD
 
@@ -41,7 +41,7 @@ A bird evading fireballs and exploding spikedballs with its own eggs.
 
 The bird has to survive the maximum time possible taking care not be exploded by fireballs and spikedballs.
 
-### Mechanic
+### Mechanics
 1. Mobility: the bird has the ability to move rigth, left, up and down. This way skipping the balls.
 2. Shoot: the bird has the ability to shoot eggs against spikedballs.
 3. Scoring System: the number of seconds the bird survive will be the score it gets.
@@ -50,7 +50,7 @@ The bird has to survive the maximum time possible taking care not be exploded by
 - player: the bird
 - enemies: fireballs and spikedballs
 - platform: the sky, only one
-- levels: only one, the dificulty will increase parallel the time. Icreasing the spikedballs's speed and fireball's rate
+- levels: only one, the number speaked balls will increment parallel the time
 
 ### User interactions
 Movement keys
@@ -63,14 +63,15 @@ Player egg shooter key
 - space
 
 ### Screens
-1. Boot: shows the logo game
+1. Boot: shows the name game
 2. Prealoader: loads assets and gets current user score if exist
 3. Authentication: if there is not a user saved on local storage, asks player name
-4. Title: gives options to start, configure or see credits game
+4. Title: gives options to start, configure, see credits or get leader board game
 5. Options: configures sound
 6. Credits: shows credits
-7. Game: plays the game
-8. Game Over: shows player's current and maximum scores, asks to restart the game
+7. Leader Board: shows leaders scores' game
+8. Game: plays the game
+9. Game Over: shows player's current and maximum scores, asks to go to the menu
 
 
 ## Getting Started
@@ -107,6 +108,10 @@ Open the next link [http://localhost:8080/](http://localhost:8080/) and enter a 
 
 ### Run tests
 
+Only run the next comman inside the project's root directory:
+
+    $ npm run test
+
 ### Deployment
 
 To deploy this project on heroku run the next commands:
@@ -117,9 +122,9 @@ if you are on `master` branch:
 
     $ git push heroku master
 
-or if you are in `another-branch`;
+or if you are in `another-branch`:
 
-$ git push heroku another-branch:master
+    $ git push heroku another-branch:master
 
 
 ## Authors
@@ -143,9 +148,20 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- 
-- 
-- 
+inputText Phaser library
+- [rexrainbow](https://rexrainbow.github.io/phaser3-rex-notes/)
+
+Sounds
+- [PlayOnLoop](https://opengameart.org/users/playonloop)
+- [Deva](https://opengameart.org/users/deva)
+
+Images
+- [AntumDeluge](https://opengameart.org/users/antumdeluge)
+- [Eslchr](https://opengameart.org/users/eslchr)
+- [Msavioti](https://opengameart.org/users/msavioti)
+- [Kelvin Shadewing](https://opengameart.org/users/kelvin-shadewing)
+- [ramses2099](https://opengameart.org/users/ramses2099)
+
 
 ## License
 
