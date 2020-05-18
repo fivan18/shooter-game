@@ -36,7 +36,7 @@ export default class AuthenticationScene extends Phaser.Scene {
       .resize(400, 100)
       .setOrigin(0.5)
       .on('textchange', inputText => {
-        if (/^[a-z]+$/g.test(inputText.text.trim())) {
+        if (/^[a-z]+$/g.test(inputText.text)) {
           printText.text = 'Valid name';
         } else {
           printText.text = 'Your username is invalid';
