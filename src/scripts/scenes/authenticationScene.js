@@ -16,6 +16,7 @@ export default class AuthenticationScene extends Phaser.Scene {
   }
 
   create() {
+    // message
     const printText = this.add.text(400, 200, 'Enter your username...', {
       fontSize: 30,
       fixedWidth: 800,
@@ -25,6 +26,7 @@ export default class AuthenticationScene extends Phaser.Scene {
       align: 'center',
     }).setOrigin(0.5);
 
+    // input
     const inputText = this.add
       .rexInputText(400, 250, 10, 10, {
         type: 'text',
