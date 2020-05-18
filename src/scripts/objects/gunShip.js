@@ -1,8 +1,5 @@
-/* global Phaser */
-
-import 'phaser';
 import Entity from './entity';
-import EnemyLaser from './enemyLaser'
+import EnemyLaser from './enemyLaser';
 
 export default class GunShip extends Entity {
   constructor(scene, x, y, angle) {

@@ -1,6 +1,3 @@
-/* global Phaser */
-
-import 'phaser';
 import Entity from './entity';
 
 export default class PlayerLaser extends Entity {
