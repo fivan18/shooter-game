@@ -13,6 +13,7 @@ export default class Model {
     this._score = this.local.value;
   }
 
+  // background music
   set musicOn(value) {
     this._musicOn = value;
   }
