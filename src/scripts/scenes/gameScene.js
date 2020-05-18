@@ -60,7 +60,7 @@ export default class GameScene extends Phaser.Scene {
 
     /* ************************************** Entities ************************************** */
     this.enemies = this.add.group();
-    this.enemyLasers = this.add.group();
+    this.fireballs = this.add.group();
     this.playerLasers = this.add.group();
 
     this.player = new Player(
@@ -121,7 +121,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
+    this.physics.add.overlap(this.player, this.fireballs, (player, laser) => {
       if (!player.getData('isDead')
           && !laser.getData('isDead')) {
         player.explode(false);
@@ -183,7 +183,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     /* ************** Frustum culling to remove everything that moves off screen *************** */
-    this.enemyLasers.getChildren().forEach((laser) => {
+    this.fireballs.getChildren().forEach((laser) => {
       laser.update();
       if (laser.x < -laser.displayWidth
         || laser.x > this.game.config.width + laser.displayWidth

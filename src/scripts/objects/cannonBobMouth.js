@@ -1,5 +1,5 @@
 import Entity from './entity';
-import EnemyLaser from './enemyLaser';
+import Fireball from './fireball';
 
 export default class CannonBobMouth extends Entity {
   constructor(scene, x, y, angle) {
@@ -10,14 +10,14 @@ export default class CannonBobMouth extends Entity {
     this.shootTimer = this.scene.time.addEvent({
       delay: 2000,
       callback() {
-        const laser = new EnemyLaser(
+        const laser = new Fireball(
           this.scene,
           this.x,
           this.y,
           this.angle,
         );
         laser.setScale(0.1);
-        this.scene.enemyLasers.add(laser);
+        this.scene.fireballs.add(laser);
       },
       callbackScope: this,
       loop: true,
