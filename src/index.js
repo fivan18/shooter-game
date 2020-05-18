@@ -11,6 +11,7 @@ import AuthenticationScene from './scripts/scenes/authenticationScene';
 import TitleScene from './scripts/scenes/titleScene';
 import OptionsScene from './scripts/scenes/optionsScene';
 import CreditsScene from './scripts/scenes/creditsScene';
+import LeaderBoardScene from './scripts/scenes/leaderBoardScene';
 import Model from './scripts/model';
 
 class Game extends Phaser.Game {
@@ -27,6 +28,7 @@ class Game extends Phaser.Game {
     this.scene.add('Title', TitleScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
+    this.scene.add('LeaderBoard', LeaderBoardScene);
     this.scene.add('Game', GameScene);
     this.scene.add('GameOver', GameOverScene);
     this.scene.start('Boot');

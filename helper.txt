@@ -15,8 +15,10 @@ https://opengameart.org/
 /* eslint import/no-unresolved: [2, { ignore: ['^date-fns$'] }] */
 /* eslint no-unused-expressions: ["error", { "allowShortCircuit": true }] */
 
-You must implement a scoring system, so that when the user completes a game they are given a score (number)
-You should use this service API to save the score associated to the game and the user name, and display a leaderboard (as a Phaser scene)
+You must implement a scoring system, so that when the user completes a game they are given a score 
+(number)
+You should use this service API to save the score associated to the game and the user name, and 
+display a leaderboard (as a Phaser scene)
 
 answer this question as part of the text in the PR:
 Explain what were your initial objectives (at the end of day 2) of the project and which ones did you (or not) achieve and why 
