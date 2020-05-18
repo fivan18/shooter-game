@@ -1,0 +1,32 @@
+38RKgIYmFf81u1FUyPyI
+
+https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/38RKgIYmFf81u1FUyPyI/scores/
+
+
+Phaser input rexrainbow
+https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/inputtext/inputtext.js
+https://rexrainbow.github.io/phaser3-rex-notes/
+
+
+https://opengameart.org/
+
+/* global Phaser */
+/* eslint-disable no-unused-expressions */
+/* eslint import/no-unresolved: [2, { ignore: ['^date-fns$'] }] */
+/* eslint no-unused-expressions: ["error", { "allowShortCircuit": true }] */
+
+You must implement a scoring system, so that when the user completes a game they are given a score (number)
+You should use this service API to save the score associated to the game and the user name, and display a leaderboard (as a Phaser scene)
+
+answer this question as part of the text in the PR:
+Explain what were your initial objectives (at the end of day 2) of the project and which ones did you (or not) achieve and why 
+
+Test JS code
+
+Aknowlegment
+
+Update readme
+
+deploy to heroku
+
+create pull request
