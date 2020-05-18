@@ -16,19 +16,19 @@ export default class SpeakedBall extends Entity {
   }
 
   update() {
-    if (!this.getData('isDead') && this.scene.player) {
+    if (!this.getData('isDead') && this.scene.bird) {
       if (Phaser.Math.Distance.Between(
         this.x,
         this.y,
-        this.scene.player.x,
-        this.scene.player.y,
+        this.scene.bird.x,
+        this.scene.bird.y,
       ) < 320) {
         this.state = this.states.CHASE;
       }
 
       if (this.state === this.states.CHASE) {
-        const dx = this.scene.player.x - this.x;
-        const dy = this.scene.player.y - this.y;
+        const dx = this.scene.bird.x - this.x;
+        const dy = this.scene.bird.y - this.y;
 
         const angle = Math.atan2(dy, dx);
 
@@ -40,7 +40,7 @@ export default class SpeakedBall extends Entity {
       }
     }
 
-    if (this.x < this.scene.player.x) {
+    if (this.x < this.scene.bird.x) {
       this.angle -= 5;
     } else {
       this.angle += 5;

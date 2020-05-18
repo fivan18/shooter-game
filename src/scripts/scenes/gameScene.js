@@ -1,7 +1,7 @@
 /* global Phaser */
 
 import 'phaser';
-import Player from '../objects/player';
+import Bird from '../objects/bird';
 import SpeakedBall from '../objects/speakedBall';
 import CannonBobMouth from '../objects/cannonBobMouth';
 
@@ -63,7 +63,7 @@ export default class GameScene extends Phaser.Scene {
     this.fireballs = this.add.group();
     this.eggs = this.add.group();
 
-    this.player = new Player(
+    this.bird = new Bird(
       this,
       this.game.config.width * 0.5,
       this.game.config.height * 0.5,
@@ -112,20 +112,20 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    this.physics.add.overlap(this.player, this.enemies, (player, enemy) => {
-      if (!player.getData('isDead')
+    this.physics.add.overlap(this.bird, this.enemies, (bird, enemy) => {
+      if (!bird.getData('isDead')
           && !enemy.getData('isDead')) {
-        player.explode(false);
-        player.onDestroy();
+        bird.explode(false);
+        bird.onDestroy();
         enemy.explode(true);
       }
     });
 
-    this.physics.add.overlap(this.player, this.fireballs, (player, laser) => {
-      if (!player.getData('isDead')
+    this.physics.add.overlap(this.bird, this.fireballs, (bird, laser) => {
+      if (!bird.getData('isDead')
           && !laser.getData('isDead')) {
-        player.explode(false);
-        player.onDestroy();
+        bird.explode(false);
+        bird.onDestroy();
         laser.destroy();
       }
     });
@@ -150,25 +150,25 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    /* *********************************** Player movement ********************************** */
-    if (!this.player.getData('isDead')) {
-      this.player.update();
+    /* *********************************** Bird movement ********************************** */
+    if (!this.bird.getData('isDead')) {
+      this.bird.update();
       if (this.keyW.isDown) {
-        this.player.moveUp();
+        this.bird.moveUp();
       } else if (this.keyS.isDown) {
-        this.player.moveDown();
+        this.bird.moveDown();
       }
       if (this.keyA.isDown) {
-        this.player.moveLeft();
+        this.bird.moveLeft();
       } else if (this.keyD.isDown) {
-        this.player.moveRight();
+        this.bird.moveRight();
       }
 
       if (this.keySpace.isDown) {
-        this.player.setData('isShooting', true);
+        this.bird.setData('isShooting', true);
       } else {
-        this.player.setData('timerShootTick', this.player.getData('timerShootDelay') - 1);
-        this.player.setData('isShooting', false);
+        this.bird.setData('timerShootTick', this.bird.getData('timerShootDelay') - 1);
+        this.bird.setData('isShooting', false);
       }
     }
 
