@@ -17,10 +17,10 @@ export default class LeaderBoardScene extends Phaser.Scene {
 
   create() {
     //  Create our own Event Emitter for API to fetch info
-    let emitter = new Phaser.Events.EventEmitter();
+    const emitter = new Phaser.Events.EventEmitter();
     const displayText = (text, height) => {
-      this.add.text(this.game.config.width * 0.5, 
-        height, 
+      this.add.text(this.game.config.width * 0.5,
+        height,
         text,
         {
           fontFamily: 'monospace',
@@ -28,14 +28,13 @@ export default class LeaderBoardScene extends Phaser.Scene {
           fontStyle: 'bold',
           color: '#808080',
           align: 'center',
-        }
-      ).setOrigin(0.5);
+        }).setOrigin(0.5);
     };
 
     emitter.on('infoLoaded', (scores) => {
       let height = 128;
-      if(scores.length == 0) {
-        displayText("No scores found", height);
+      if (scores.length === 0) {
+        displayText('No scores found', height);
       } else if (scores.length < 4) {
         scores.forEach(score => {
           displayText(`${score.user} : ${score.score}`, height);
@@ -51,8 +50,8 @@ export default class LeaderBoardScene extends Phaser.Scene {
 
     this.sys.game.globals.model.apiAllScores()
       .then(scores => {
-        if(scores) {
-          const sortedScores = scores.sort((a , b) => b.score - a.score);
+        if (scores) {
+          const sortedScores = scores.sort((a, b) => b.score - a.score);
           emitter.emit('infoLoaded', sortedScores);
         } else {
           displayText('Try again please', 128);

@@ -47,39 +47,38 @@ export default class Model {
   // only api storage
   static playersNames(scores) {
     const names = scores.map(score => score.user);
-    //console.log(names.filter((a, b) => names.indexOf(a) === b));
+    // console.log(names.filter((a, b) => names.indexOf(a) === b));
     return names.filter((a, b) => names.indexOf(a) === b);
   }
 
   static maxScore(playerName, scores) {
     const playerScores = scores.filter(score => score.user === playerName);
-    //console.log(playerScores);
-    //console.log(playerScores.reduce((maxScore, score) => score.score > maxScore.score ? score : maxScore));
-    return playerScores.length > 0 ? 
-      playerScores.reduce((maxScore, score) => score.score > maxScore.score ? score : maxScore) :
-      undefined;
+    // console.log(playerScores);
+    return playerScores.length > 0
+      ? playerScores.reduce((maxScore, score) => (score.score > maxScore.score ? score : maxScore))
+      : undefined;
   }
 
   static exists(targetScore, scores) {
-    return scores.some(score => score.user === targetScore.user 
+    return scores.some(score => score.user === targetScore.user
                                 && score.score === targetScore.score);
   }
 
   async apiScore(playerName) {
     const scores = await this.api.retrieve();
-    if(scores){
+    if (scores) {
       const max = Model.maxScore(playerName, scores);
-      return max ? max : 1;
+      return max || 1;
     }
     return null;
   }
 
   async apiAllScores() {
     const scores = await this.api.retrieve();
-    if(scores) {
+    if (scores) {
       const players = Model.playersNames(scores);
-      //console.log(scores);
-      let allScores = [];
+      // console.log(scores);
+      const allScores = [];
       players.forEach(player => {
         allScores.push(Model.maxScore(player, scores));
       });

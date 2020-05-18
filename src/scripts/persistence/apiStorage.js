@@ -36,6 +36,6 @@ export default class ApiStorage {
       mode: 'cors',
     };
     const scores = await this.request(init);
-    return scores ?  scores.result : null;
+    return scores ? scores.result : null;
   }
 }
