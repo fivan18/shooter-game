@@ -2,7 +2,7 @@
 
 import 'phaser';
 import Player from '../objects/player';
-import ChaserShip from '../objects/chaserShip';
+import SpeakedBall from '../objects/speakedBall';
 import GunShip from '../objects/gunShip';
 
 export default class GameScene extends Phaser.Scene {
@@ -89,7 +89,7 @@ export default class GameScene extends Phaser.Scene {
     this.time.addEvent({
       delay: 2000,
       callback() {
-        const enemy = new ChaserShip(
+        const enemy = new SpeakedBall(
           this,
           Phaser.Math.Between(0, this.game.config.width),
           0,

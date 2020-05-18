@@ -4,9 +4,9 @@ import 'phaser';
 import Entity from './entity';
 
 
-export default class ChaserShip extends Entity {
+export default class SpeakedBall extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, 'spikedball', 'ChaserShip');
+    super(scene, x, y, 'spikedball', 'SpeakedBall');
     this.body.velocity.y = Phaser.Math.Between(50, 100);
     this.states = {
       MOVE_DOWN: 'MOVE_DOWN',
