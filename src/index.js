@@ -1,3 +1,5 @@
+/* global Phaser */
+
 import 'phaser';
 import './assets/css/style.css';
 import config from './scripts/config/config';
@@ -12,10 +14,12 @@ import CreditsScene from './scripts/scenes/creditsScene';
 import Model from './scripts/model';
 
 class Game extends Phaser.Game {
-  constructor () {
+  constructor() {
     super(config);
     const model = new Model();
-    this.globals = { model, bgMusic: null, playerName: null, currentScore: 0 };
+    this.globals = {
+      model, bgMusic: null, playerName: null, currentScore: 0,
+    };
 
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
@@ -28,7 +32,5 @@ class Game extends Phaser.Game {
     this.scene.start('Boot');
   }
 }
- 
+
 window.game = new Game();
-
-
