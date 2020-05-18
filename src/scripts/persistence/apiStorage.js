@@ -7,7 +7,7 @@ export default class ApiStorage {
     try {
       const response = await fetch(
         `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${this.apiKey}/scores/`,
-        init
+        init,
       );
       if (response.ok) {
         const info = await response.json();
@@ -21,19 +21,21 @@ export default class ApiStorage {
 
   async save(score) {
     const init = {
-      method: 'POST', 
-      mode: 'cors', 
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-      body: JSON.stringify(score)
+      method: 'POST',
+      mode: 'cors',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(score),
     };
     const message = await this.request(init);
     return message;
   }
 
   async retrieve() {
-    const init = {  method: 'GET',
-                    mode: 'cors'};
-    const scores = await this.request(init)                
+    const init = {
+      method: 'GET',
+      mode: 'cors',
+    };
+    const scores = await this.request(init);
     return scores.result;
   }
 }
