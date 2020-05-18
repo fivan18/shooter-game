@@ -3,7 +3,7 @@
 import 'phaser';
 import Player from '../objects/player';
 import SpeakedBall from '../objects/speakedBall';
-import GunShip from '../objects/gunShip';
+import CannonBobMouth from '../objects/cannonBobMouth';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -70,7 +70,7 @@ export default class GameScene extends Phaser.Scene {
       'dodo',
     );
 
-    const enemyRigth = new GunShip(
+    const enemyRigth = new CannonBobMouth(
       this,
       this.game.config.width - 10,
       0,
@@ -78,7 +78,7 @@ export default class GameScene extends Phaser.Scene {
     ).setScale(1.5);
     this.enemies.add(enemyRigth);
 
-    const enemyLeft = new GunShip(
+    const enemyLeft = new CannonBobMouth(
       this,
       10,
       this.game.config.height,
