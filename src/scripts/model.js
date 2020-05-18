@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+
 import LocalStorage from './persistence/localStorage';
 import ApiStorage from './persistence/apiStorage';
 
@@ -6,32 +8,23 @@ export default class Model {
     this.local = new LocalStorage('score');
     this.api = new ApiStorage('38RKgIYmFf81u1FUyPyI');
 
-    this._soundOn = true;
     this._musicOn = true;
     this._bgMusicPlaying = false;
     this._score = this.local.value;
   }
- 
+
   set musicOn(value) {
     this._musicOn = value;
   }
- 
+
   get musicOn() {
     return this._musicOn;
   }
- 
-  set soundOn(value) {
-    this._soundOn = value;
-  }
- 
-  get soundOn() {
-    return this._soundOn;
-  }
- 
+
   set bgMusicPlaying(value) {
     this._bgMusicPlaying = value;
   }
- 
+
   get bgMusicPlaying() {
     return this._bgMusicPlaying;
   }
@@ -51,21 +44,21 @@ export default class Model {
   }
 
   // only api storage
-  async apiScore(playerName){
+  async apiScore(playerName) {
     const scores = await this.api.retrieve();
-    let maxScore = 1;
+    const maxScore = 1;
     const playerScores = scores.filter(score => score.user === playerName)
-          .map(score => score.score);
+      .map(score => score.score);
     return Math.max(...playerScores, maxScore);
   }
 
   save() {
-    const user = this._score.user;
+    const { user } = this._score;
     const instanceScore = this._score.score;
     this.api.retrieve()
       .then(scores => {
         const exist = scores.some(score => score.user === user && score.score === instanceScore);
-        if(!exist) {
+        if (!exist) {
           this.api.save(this._score);
         }
       });
