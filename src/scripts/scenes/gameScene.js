@@ -1,7 +1,9 @@
 /* global Phaser */
 
 import 'phaser';
-import { Player, ChaserShip, GunShip } from '../objects/entitties';
+import Player from '../objects/player';
+import ChaserShip from '../objects/chaserShip';
+import GunShip from '../objects/gunShip';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
