@@ -133,7 +133,7 @@ export default class GameScene extends Phaser.Scene {
       fontStyle: 'bold',
       color: '#ffffff',
       align: 'center'
-    }).currentScore.setOrigin(0);
+    }).setOrigin(0);
     this.time.addEvent({
       delay: 1000,
       callback: () => {
@@ -194,7 +194,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    this.playerLasers.getChildren().forEach(() => {
+    this.playerLasers.getChildren().forEach((laser) => {
       laser.update();
 
       if (laser.x < -laser.displayWidth ||
