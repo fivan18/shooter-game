@@ -45,21 +45,49 @@ export default class Model {
   }
 
   // only api storage
-  async apiScore(playerName) {
-    const scores = await this.api.retrieve();
-    const maxScore = 1;
-    const playerScores = scores.filter(score => score.user === playerName)
-      .map(score => score.score);
-    return Math.max(...playerScores, maxScore);
+  static playersNames(scores) {
+    const names = scores.map(score => score.user);
+    return names.filter((a, b) => array.indexOf(a) === b);
   }
 
+  static maxScore(playerName, scores) {
+    const playerScores = scores.filter(score => score.user === playerName);
+    return playerScores.length > 0 ? 
+      playerScores.reduce((maxScore, score) => score.score > maxScore.score ? score : maxScore) :
+      undefined;
+  }
+
+  static exists(targetScore, scores) {
+    return scores.some(score => score.user === targetScore.user 
+                                && score.score === targetScore.score);
+  }
+
+  async apiScore(playerName) {
+    const scores = await this.api.retrieve();
+    if(scores){
+      const max = this.maxScore(playerName, scores);
+      return max ? max : 1;
+    }
+    return null;
+  }
+
+  async apiAllScores() {
+    const scores = await this.api.retrieve();
+    let allScores = [];
+    if(scores) {
+      const players = playersNames(scores);
+      players.forEach(player => {
+        allScores.push(this.maxScore(player, scores));
+      });
+    }
+    return null;
+  }
+
+  // refactor
   save() {
-    const { user } = this._score;
-    const instanceScore = this._score.score;
     this.api.retrieve()
       .then(scores => {
-        const exist = scores.some(score => score.user === user && score.score === instanceScore);
-        if (!exist) {
+        if (scores && !tnis.exists(this._score, scores)) {
           this.api.save(this._score);
         }
       });
