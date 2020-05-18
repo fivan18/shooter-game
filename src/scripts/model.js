@@ -47,11 +47,14 @@ export default class Model {
   // only api storage
   static playersNames(scores) {
     const names = scores.map(score => score.user);
-    return names.filter((a, b) => array.indexOf(a) === b);
+    //console.log(names.filter((a, b) => names.indexOf(a) === b));
+    return names.filter((a, b) => names.indexOf(a) === b);
   }
 
   static maxScore(playerName, scores) {
     const playerScores = scores.filter(score => score.user === playerName);
+    //console.log(playerScores);
+    //console.log(playerScores.reduce((maxScore, score) => score.score > maxScore.score ? score : maxScore));
     return playerScores.length > 0 ? 
       playerScores.reduce((maxScore, score) => score.score > maxScore.score ? score : maxScore) :
       undefined;
@@ -65,7 +68,7 @@ export default class Model {
   async apiScore(playerName) {
     const scores = await this.api.retrieve();
     if(scores){
-      const max = this.maxScore(playerName, scores);
+      const max = Model.maxScore(playerName, scores);
       return max ? max : 1;
     }
     return null;
@@ -73,21 +76,22 @@ export default class Model {
 
   async apiAllScores() {
     const scores = await this.api.retrieve();
-    let allScores = [];
     if(scores) {
-      const players = playersNames(scores);
+      const players = Model.playersNames(scores);
+      //console.log(scores);
+      let allScores = [];
       players.forEach(player => {
-        allScores.push(this.maxScore(player, scores));
+        allScores.push(Model.maxScore(player, scores));
       });
+      return allScores;
     }
     return null;
   }
 
-  // refactor
   save() {
     this.api.retrieve()
       .then(scores => {
-        if (scores && !tnis.exists(this._score, scores)) {
+        if (scores && !Model.exists(this._score, scores)) {
           this.api.save(this._score);
         }
       });

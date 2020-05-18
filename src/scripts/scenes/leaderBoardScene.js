@@ -16,37 +16,48 @@ export default class LeaderBoardScene extends Phaser.Scene {
   }
 
   create() {
-    // text
-    this.title = this.add.text(this.game.config.width * 0.5, 128, 'GAME OVER', {
-      fontFamily: 'monospace',
-      fontSize: 48,
-      fontStyle: 'bold',
-      color: '#808080',
-      align: 'center',
-    });
-    this.title.setOrigin(0.5);
+    //  Create our own Event Emitter for API to fetch info
+    let emitter = new Phaser.Events.EventEmitter();
+    const displayText = (text, height) => {
+      this.add.text(this.game.config.width * 0.5, 
+        height, 
+        text,
+        {
+          fontFamily: 'monospace',
+          fontSize: 48,
+          fontStyle: 'bold',
+          color: '#808080',
+          align: 'center',
+        }
+      ).setOrigin(0.5);
+    };
 
-    this.currentScore = this.add.text(this.game.config.width * 0.5, 180,
-      `Score: ${this.sys.game.globals.currentScore}`,
-      {
-        fontFamily: 'monospace',
-        fontSize: 15,
-        fontStyle: 'bold',
-        color: '#808080',
-        align: 'center',
-      });
-    this.currentScore.setOrigin(0.5);
+    emitter.on('infoLoaded', (scores) => {
+      let height = 128;
+      if(scores.length == 0) {
+        displayText("No scores found", height);
+      } else if (scores.length < 4) {
+        scores.forEach(score => {
+          displayText(`${score.user} : ${score.score}`, height);
+          height += 70;
+        });
+      } else {
+        scores.slice(0, 3).forEach(score => {
+          displayText(`${score.user} : ${score.score}`, height);
+          height += 70;
+        });
+      }
+    }, this);
 
-    this.maxScore = this.add.text(this.game.config.width * 0.5, 200,
-      `Max Score: ${this.sys.game.globals.model.score.score}`,
-      {
-        fontFamily: 'monospace',
-        fontSize: 15,
-        fontStyle: 'bold',
-        color: '#808080',
-        align: 'center',
+    this.sys.game.globals.model.apiAllScores()
+      .then(scores => {
+        if(scores) {
+          const sortedScores = scores.sort((a , b) => b.score - a.score);
+          emitter.emit('infoLoaded', sortedScores);
+        } else {
+          displayText('Try again please', 128);
+        }
       });
-    this.maxScore.setOrigin(0.5);
 
     // return to title scene
     this.menuButton = new Button(this, 400, 350, 'blueButton1', 'blueButton2', 'Menu', 'Title');
