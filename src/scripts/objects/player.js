@@ -2,7 +2,7 @@
 
 import 'phaser';
 import Entity from './entity';
-import PlayerLaser from './playerLaser';
+import Egg from './egg';
 
 export default class Player extends Entity {
   constructor(scene, x, y, key) {
@@ -59,8 +59,8 @@ export default class Player extends Entity {
       if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
         this.setData('timerShootTick', this.getData('timerShootTick') + 1); // every game update, increase timerShootTick by one until we reach the value of timerShootDelay
       } else { // when the "manual timer" is triggered:
-        const laser = new PlayerLaser(this.scene, this.x, this.y);
-        this.scene.playerLasers.add(laser);
+        const laser = new Egg(this.scene, this.x, this.y);
+        this.scene.eggs.add(laser);
 
         this.scene.sfx.laser.play(); // play the laser sound effect
         this.setData('timerShootTick', 0);

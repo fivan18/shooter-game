@@ -61,7 +61,7 @@ export default class GameScene extends Phaser.Scene {
     /* ************************************** Entities ************************************** */
     this.enemies = this.add.group();
     this.fireballs = this.add.group();
-    this.playerLasers = this.add.group();
+    this.eggs = this.add.group();
 
     this.player = new Player(
       this,
@@ -102,13 +102,13 @@ export default class GameScene extends Phaser.Scene {
     });
 
     /* ************************ Collider and overlap beetwen entitties ************************ */
-    this.physics.add.collider(this.playerLasers, this.enemies, (playerLaser, enemy) => {
+    this.physics.add.collider(this.eggs, this.enemies, (egg, enemy) => {
       if (enemy) {
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
         enemy.explode(true);
-        playerLaser.destroy();
+        egg.destroy();
       }
     });
 
@@ -195,7 +195,7 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    this.playerLasers.getChildren().forEach((laser) => {
+    this.eggs.getChildren().forEach((laser) => {
       laser.update();
 
       if (laser.x < -laser.displayWidth
