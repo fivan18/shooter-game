@@ -48,6 +48,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
       }
     }, this);
 
+    // fetch API info
     this.sys.game.globals.model.apiAllScores()
       .then(scores => {
         if (scores) {
