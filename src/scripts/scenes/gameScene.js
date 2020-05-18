@@ -1,21 +1,13 @@
 import 'phaser';
-import { Player, ChaserShip, GunShip, ScrollingBackground } from '../objects/entitties';
+import { Player, ChaserShip, GunShip } from '../objects/entitties';
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('Game');
-    this.score = 1;
   }
 
-  getEnemiesByType(type) {
-    var arr = [];
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-      var enemy = this.enemies.getChildren()[i];
-      if (enemy.getData("type") == type) {
-        arr.push(enemy);
-      }
-    }
-    return arr;
+  init() {
+    this.score = 1;
   }
  
   preload () {
@@ -25,6 +17,7 @@ export default class GameScene extends Phaser.Scene {
   }
  
   create () {
+    /* ******************************* Animations and sounds ******************************** */
     this.anims.create({
       key: "cannonbobmouth",
       frames: this.anims.generateFrameNumbers("cannonbobmouth"),
@@ -51,10 +44,21 @@ export default class GameScene extends Phaser.Scene {
         this.sound.add("sndExplode0"),
         this.sound.add("sndExplode1")
       ],
-      laser: this.sound.add("sndLaser")
+      laser: this.sound.add("eggSound")
     };
 
-    // import player entity
+    /* ************************************** Keyboard ************************************** */
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);    
+
+    /* ************************************** Entities ************************************** */
+    this.enemies = this.add.group();
+    this.enemyLasers = this.add.group();
+    this.playerLasers = this.add.group();
+
     this.player = new Player(
       this,
       this.game.config.width * 0.5,
@@ -62,18 +66,22 @@ export default class GameScene extends Phaser.Scene {
       "dodo"
     );
 
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    let enemyRigth = new GunShip(
+      this,
+      this.game.config.width - 10,
+      0,
+      90
+    ).setScale(1.5);
+    this.enemies.add(enemyRigth);
 
-    this.enemies = this.add.group();
-    this.enemyLasers = this.add.group();
-    this.playerLasers = this.add.group();
-    
+    let enemyLeft = new GunShip(
+      this,
+      10,
+      this.game.config.height,
+      270
+    ).setScale(1.5);
+    this.enemies.add(enemyLeft);
 
-    // spawn event
     this.time.addEvent({
       delay: 2000,
       callback: function() {
@@ -89,25 +97,7 @@ export default class GameScene extends Phaser.Scene {
       loop: true
     });
 
-    let enemyRigth = new GunShip(
-      this,
-      this.game.config.width - 10,
-      0,
-      90
-    );
-    enemyRigth.setScale(1.5);
-    this.enemies.add(enemyRigth);
-
-    let enemyLeft = new GunShip(
-      this,
-      10,
-      this.game.config.height,
-      270
-    );
-    enemyLeft.setScale(1.5);
-    this.enemies.add(enemyLeft);
-
-    // collide and overlap
+    /* ************************ Collider and overlap beetwen entitties ************************ */
     this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
       if (enemy) {
         if (enemy.onDestroy !== undefined) {
@@ -136,15 +126,14 @@ export default class GameScene extends Phaser.Scene {
       }
     });
 
-    // Score 
+    /* **************************************** Score *************************************** */
     this.currentScore = this.add.text(16, 16, "Score: 1", {
       fontFamily: 'monospace',
       fontSize: 20,
       fontStyle: 'bold',
       color: '#ffffff',
       align: 'center'
-    });
-    this.currentScore.setOrigin(0);
+    }).currentScore.setOrigin(0);
     this.time.addEvent({
       delay: 1000,
       callback: () => {
@@ -157,6 +146,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    /* *********************************** Player movement ********************************** */
     if (!this.player.getData("isDead")) {
       this.player.update();
       if (this.keyW.isDown) {
@@ -181,6 +171,7 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
+    /* ********************* Maintain cannonbobmouth enemies beetwen edges ******************* */
     this.enemies.getChildren().forEach((enemy) => {
       enemy.update();
       if (enemy.y < 0) {
@@ -188,10 +179,22 @@ export default class GameScene extends Phaser.Scene {
       } else if(enemy.y > this.game.config.height){
         enemy.body.velocity.y = -100;
       }
-    }, this);
+    });
 
-    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
-      var laser = this.enemyLasers.getChildren()[i];
+    /* ************** Frustum culling to remove everything that moves off screen *************** */
+    this.enemyLasers.getChildren().forEach((laser) => {
+      laser.update();
+      if (laser.x < -laser.displayWidth ||
+        laser.x > this.game.config.width + laser.displayWidth ||
+        laser.y < -laser.displayHeight * 4 ||
+        laser.y > this.game.config.height + laser.displayHeight) {
+        if (laser) {
+          laser.destroy();
+        }
+      }
+    });
+
+    this.playerLasers.getChildren().forEach(() => {
       laser.update();
 
       if (laser.x < -laser.displayWidth ||
@@ -202,20 +205,6 @@ export default class GameScene extends Phaser.Scene {
           laser.destroy();
         }
       }
-    }
-
-    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
-      var laser = this.playerLasers.getChildren()[i];
-      laser.update();
-
-      if (laser.x < -laser.displayWidth ||
-        laser.x > this.game.config.width + laser.displayWidth ||
-        laser.y < -laser.displayHeight * 4 ||
-        laser.y > this.game.config.height + laser.displayHeight) {
-        if (laser) {
-          laser.destroy();
-        }
-      }
-    }
+    });
   } 
 };

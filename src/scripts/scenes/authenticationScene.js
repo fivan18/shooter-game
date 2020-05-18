@@ -6,7 +6,11 @@ export default class AuthenticationScene extends Phaser.Scene {
     super('Authentication');
   }
  
-  preload () {
+  preload() {
+    // add background to this scene
+    this.add.image(0, 0, 'background')
+      .setOrigin(0, 0)
+      .setScale(1);
   }
 
   validateName(name){
@@ -14,29 +18,35 @@ export default class AuthenticationScene extends Phaser.Scene {
   }
  
   create () {
-    var printText = this.add.text(400, 200, '', {
-      fontSize: '12px',
-      fixedWidth: 100,
+    let printText = this.add.text(400, 200, "Enter your username...", {
+      fontSize: 30,
+      fixedWidth: 800,
       fixedHeight: 100,
+      fontStyle: 'bold',
+      color: '#808080',
+      align: 'center'
     }).setOrigin(0.5);
-    printText.text = 'Enter your username...';
 
-    var inputText = this.add.rexInputText(400, 400, 10, 10, {
-      type: 'text',
-      placeholder: 'username',
-      fontSize: '12px',
-    })
-    .resize(100, 100)
-    .setOrigin(0.5)
-    .on('textchange', inputText => {
-      if(this.validateName(inputText.text)) {
-        printText.text = 'Valid name';
-      } else {
-        printText.text = 'Your name is invalid: upercase characters [a-z] and more than one please';
-      }
-    });
+    let inputText = this.add
+      .rexInputText(400, 250, 10, 10, {
+        type: 'text',
+        placeholder: 'username',
+        fontSize: '24px',
+        color: '#A9A9A9',
+        align: 'center'
+      })
+      .resize(400, 100)
+      .setOrigin(0.5)
+      .on('textchange', inputText => {
+        if(this.validateName(inputText.text)) {
+          printText.text = 'Valid name';
+        } else {
+          printText.text = 'Your username is invalid';
+        }
+      });
 
-    this.input.keyboard.addKey('ENTER').on('down', event => {
+    // set event
+    this.input.keyboard.addKey('ENTER').on('down', () => {
       if(this.validateName(inputText.text.trim())) {
         const globals = this.sys.game.globals;
         globals.playerName = inputText.text.trim();
@@ -56,8 +66,5 @@ export default class AuthenticationScene extends Phaser.Scene {
         this.scene.start('Title');
       }
     });
-  }
-
-  update() {
   }
 };

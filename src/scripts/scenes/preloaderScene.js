@@ -8,7 +8,7 @@ import spikedball from "../../assets/images/spikedball.png";
 import cannonbobmouth from "../../assets/images/cannonbobmouth.png";
 import sndExplode0 from "../../assets/audio/sndExplode0.wav";
 import sndExplode1 from "../../assets/audio/sndExplode1.wav";
-import sndLaser from "../../assets/audio/sndLaser.wav";
+import eggSound from "../../assets/audio/eggSound.wav";
 // rest
 import blueButton1 from "../../assets/images/ui/blue_button02.png";
 import blueButton2 from "../../assets/images/ui/blue_button03.png";
@@ -134,7 +134,7 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     this.load.audio("sndExplode0", sndExplode0);
     this.load.audio("sndExplode1", sndExplode1);
-    this.load.audio("sndLaser", sndLaser);
+    this.load.audio("eggSound", eggSound);
 
     // rest
     this.load.image('blueButton1', blueButton1);
