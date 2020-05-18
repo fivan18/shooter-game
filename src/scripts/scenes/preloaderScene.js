@@ -156,9 +156,9 @@ export default class PreloaderScene extends Phaser.Scene {
 
       globals.model.apiScore(globals.playerName)
         .then(score => {
-          if (score && score > globals.model.score.score) {
+          if (score && (score > globals.model.score.score)) {
             globals.model.score = { score, user: globals.playerName };
-          } else if (score && globals.model.score.score > score) {
+          } else if (score && (globals.model.score.score > score)) {
             globals.model.save();
           } else {
             // this means it was a problem retrieving the data from api

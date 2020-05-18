@@ -68,7 +68,7 @@ export default class Model {
     const scores = await this.api.retrieve();
     if (scores) {
       const max = Model.maxScore(playerName, scores);
-      return max || 1;
+      return max.score || 1;
     }
     return null;
   }
