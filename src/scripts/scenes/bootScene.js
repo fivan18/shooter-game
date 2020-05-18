@@ -1,16 +1,18 @@
+/* global Phaser */
+
 import 'phaser';
-import background from "../../assets/images/backgroundGame.png";
- 
+import background from '../../assets/images/backgroundGame.png';
+
 export default class BootScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Boot');
   }
- 
-  preload () {
+
+  preload() {
     this.load.image('background', background);
   }
- 
-  create () {
+
+  create() {
     this.scene.start('Preloader');
   }
-};
+}

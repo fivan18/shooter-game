@@ -1,8 +1,10 @@
+/* global Phaser */
+
 import 'phaser';
 import Button from '../objects/button';
- 
+
 export default class OptionsScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Options');
   }
 
@@ -30,11 +32,11 @@ export default class OptionsScene extends Phaser.Scene {
       }
     }
   }
- 
-  create () {
+
+  create() {
     this.text = this.add.text(300, 100, 'Options', { fontSize: 40, fill: '#808080' });
 
-    // checkbox 
+    // checkbox
     this.musicCheckbox = this.add.image(200, 200, 'checkedBox');
     this.musicText = this.add.text(250, 190, 'Music Enabled', { fontSize: 24, fill: '#808080' });
     this.musicCheckbox.setInteractive();
@@ -49,4 +51,4 @@ export default class OptionsScene extends Phaser.Scene {
     // update audio
     this.updateAudio();
   }
-};
+}
