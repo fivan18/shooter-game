@@ -5,7 +5,7 @@ export default class CannonBobMouth extends Entity {
   constructor(scene, x, y, angle) {
     super(scene, x, y, 'cannonbobmouth', 'CannonBobMouth');
     this.play('cannonbobmouth');
-    this.body.velocity.y = 100;// Phaser.Math.Between(50, 100);
+    this.body.velocity.y = 100;
     this.angle = angle;
     this.shootTimer = this.scene.time.addEvent({
       delay: 2000,
