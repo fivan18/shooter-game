@@ -1,4 +1,5 @@
 /* global Phaser */
+/* eslint import/no-unresolved: [2, { ignore: ['^phaser$'] }] */
 /* eslint-disable no-unused-expressions */
 
 import 'phaser';

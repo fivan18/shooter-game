@@ -1,4 +1,5 @@
 /* global Phaser */
+/* eslint import/no-unresolved: [2, { ignore: ['^phaser$'] }] */
 
 import 'phaser';
 import Button from '../objects/button';
