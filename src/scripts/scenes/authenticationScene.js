@@ -1,6 +1,5 @@
 /* global Phaser */
-/* eslint import/no-unresolved: [2, { ignore: ['^phaser$'] }] */
-/* eslint import/no-unresolved: [2, { ignore: ['^phaser3-rex-plugins\/plugins\/inputtext$'] }] */
+/* eslint import/no-unresolved: [2, { ignore: ['^(phaser3-rex-plugins\/plugins\/inputtext$ | ^phaser$)'] }] */
 
 import 'phaser';
 import InputText from 'phaser3-rex-plugins/plugins/inputtext'; // eslint-disable-line no-unused-vars
