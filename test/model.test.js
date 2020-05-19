@@ -1,4 +1,4 @@
-import Model from '../src/scripts/model';
+import Model from '../src/app/model';
 import data from './data';
 
 let scores;
