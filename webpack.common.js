@@ -5,22 +5,22 @@ module.exports = {
       {
         test: /\.(svg|png|jpg|gif)$/,
         use: {
-          loader: "file-loader",
+          loader: 'file-loader',
           options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "imgs"
-          }
-        }
+            name: '[name].[hash].[ext]',
+            outputPath: 'imgs',
+          },
+        },
       },
       {
         test: /\.(mp3|wav)$/,
         use: {
-          loader: "file-loader",
+          loader: 'file-loader',
           options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "sounds"
-          }
-        }
+            name: '[name].[hash].[ext]',
+            outputPath: 'sounds',
+          },
+        },
       },
     ],
   },

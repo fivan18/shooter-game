@@ -35,8 +35,6 @@ class Game extends Phaser.Game {
   }
 }
 
-const run = () => {
+export default () => {
   window.game = new Game();
 };
-
-export { run };
