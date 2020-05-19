@@ -53,10 +53,10 @@ export default class GameScene extends Phaser.Scene {
     };
 
     /* ************************************** Keyboard ************************************** */
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+    this.keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+    this.keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    this.keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     /* ************************************** Entities ************************************** */
@@ -154,14 +154,14 @@ export default class GameScene extends Phaser.Scene {
     /* *********************************** Bird movement ********************************** */
     if (!this.bird.getData('isDead')) {
       this.bird.update();
-      if (this.keyW.isDown) {
+      if (this.keyUP.isDown) {
         this.bird.moveUp();
-      } else if (this.keyS.isDown) {
+      } else if (this.keyDOWN.isDown) {
         this.bird.moveDown();
       }
-      if (this.keyA.isDown) {
+      if (this.keyLEFT.isDown) {
         this.bird.moveLeft();
-      } else if (this.keyD.isDown) {
+      } else if (this.keyRIGHT.isDown) {
         this.bird.moveRight();
       }
 
