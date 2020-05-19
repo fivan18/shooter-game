@@ -47,13 +47,11 @@ export default class Model {
   // only api storage
   static playersNames(scores) {
     const names = scores.map(score => score.user);
-    // console.log(names.filter((a, b) => names.indexOf(a) === b));
     return names.filter((a, b) => names.indexOf(a) === b);
   }
 
   static maxScore(playerName, scores) {
     const playerScores = scores.filter(score => score.user === playerName);
-    // console.log(playerScores);
     return playerScores.length > 0
       ? playerScores.reduce((maxScore, score) => (score.score > maxScore.score ? score : maxScore))
       : undefined;
@@ -77,7 +75,6 @@ export default class Model {
     const scores = await this.api.retrieve();
     if (scores) {
       const players = Model.playersNames(scores);
-      // console.log(scores);
       const allScores = [];
       players.forEach(player => {
         allScores.push(Model.maxScore(player, scores));
