@@ -46,11 +46,22 @@ export default class Model {
 
   // only api storage
   static playersNames(scores) {
+    if (!Array.isArray(scores)) {
+      throw new TypeError('scores is not an Array', 'model.js', 48);
+    }
+
     const names = scores.map(score => score.user);
     return names.filter((a, b) => names.indexOf(a) === b);
   }
 
   static maxScore(playerName, scores) {
+    if (!Array.isArray(scores)) {
+      throw new TypeError('scores is not an Array', 'model.js', 57);
+    }
+    if (typeof playerName !== 'string') {
+      throw new TypeError('playerName is not an String', 'model.js', 57);
+    }
+
     const playerScores = scores.filter(score => score.user === playerName);
     return playerScores.length > 0
       ? playerScores.reduce((maxScore, score) => (score.score > maxScore.score ? score : maxScore))
@@ -58,6 +69,17 @@ export default class Model {
   }
 
   static exists(targetScore, scores) {
+    if (!Array.isArray(scores)) {
+      throw new TypeError('scores is not an Array', 'model.js', 71);
+    }
+    if (typeof targetScore !== 'object'
+        || targetScore === null
+        || !Object.prototype.hasOwnProperty.call(targetScore, 'user')
+        || !Object.prototype.hasOwnProperty.call(targetScore, 'score')
+    ) {
+      throw new TypeError('targetScore is not the Object expected', 'model.js', 71);
+    }
+
     return scores.some(score => score.user === targetScore.user
                                 && score.score === targetScore.score);
   }
