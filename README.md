@@ -42,7 +42,7 @@ A bird evading fireballs and exploding spikedballs with its own eggs.
 The bird has to survive the maximum time possible taking care not be exploded by fireballs and spikedballs.
 
 ### Mechanics
-1. Mobility: the bird has the ability to move rigth, left, up and down. This way skipping the balls.
+1. Mobility: the bird has the ability to move right, left, up and down. This way skipping the balls.
 2. Shoot: the bird has the ability to shoot eggs against spikedballs.
 3. Scoring System: the number of seconds the bird survive will be the score it gets.
 
@@ -57,7 +57,7 @@ Movement keys
 - w: up
 - s: down
 - a: left
-- d: rigth
+- d: right
 
 Player egg shooter key
 - space
