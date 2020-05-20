@@ -1,7 +1,10 @@
+/* eslint import/no-unresolved:
+  [2, { ignore: [
+    '^webpack-merge$',
+    '^html-webpack-plugin$'
+  ] }] */
 const path = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
-const merge = require('webpack-merge');// eslint-disable-line import/no-unresolved
-// eslint-desable-next-line import/no-unresolved
+const merge = require('webpack-merge');// eslint-disable-line import/no-extraneous-dependencies
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
 
