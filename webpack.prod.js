@@ -1,3 +1,12 @@
+/* eslint import/no-unresolved:
+  [2, { ignore: [
+    '^webpack-merge$',
+    '^html-webpack-plugin$',
+    '^clean-webpack-plugin$',
+    '^mini-css-extract-plugin$',
+    '^optimize-css-assets-webpack-plugin$',
+    '^terser-webpack-plugin$'
+  ] }] */
 const path = require('path');
 const merge = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');

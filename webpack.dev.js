@@ -4,7 +4,7 @@
     '^html-webpack-plugin$'
   ] }] */
 const path = require('path');
-const merge = require('webpack-merge');// eslint-disable-line import/no-extraneous-dependencies
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
 
