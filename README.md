@@ -54,13 +54,13 @@ The bird has to survive the maximum time possible taking care not be exploded by
 
 ### User interactions
 Movement keys
-- w: up
-- s: down
-- a: left
-- d: right
+- ← : left
+- → : right
+- ↑ : up
+- ↓ : down
 
 Player egg shooter key
-- space
+- ⎵ : shoot
 
 ### Screens
 1. Boot: shows the name game
@@ -94,13 +94,13 @@ Install the dependencies
 
 ### Install
 
-If you want to modify the code and see the changes on live go the project's root directory and run webpack-dev-server:
+If you want to modify the code and see the changes on live go the project's root directory and run webpack-dev-server with the next command:
 
-    $ npx webpack-dev-server
+    $ npm run dev
 
-or you can run the http-server with the next command to play the game:
+or you can run the http-server for production enviroment:
 
-    $ npx http-server ./dist
+    $ npm run start
 
 ### Usage
 
