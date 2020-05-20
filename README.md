@@ -100,7 +100,7 @@ If you want to modify the code and see the changes on live go the project's root
 
 or you can run the http-server for production enviroment:
 
-    $ webpack --config webpack.prod.js
+    $ npx webpack --config webpack.prod.js
 
     $ npm run start
 
