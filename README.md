@@ -66,9 +66,9 @@ Player egg shooter key
 1. Boot: shows the name game
 2. Prealoader: loads assets and gets current user score if exist
 3. Authentication: if there is not a user saved on local storage, asks player name
-4. Title: gives options to start, configure, see credits or get leader board game
+4. Title: gives options to start, configure, see controls or get leader board game
 5. Options: configures sound
-6. Credits: shows credits
+6. Controls: shows controls
 7. Leader Board: shows leaders scores' game
 8. Game: plays the game
 9. Game Over: shows player's current and maximum scores, asks to go to the menu
