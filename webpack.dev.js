@@ -1,7 +1,7 @@
 const path = require('path');
-const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
+const merge = require('webpack-merge');// eslint-disable-line import/no-extraneous-dependencies import/no-unresolved
+const HtmlWebpackPlugin = require('html-webpack-plugin');// eslint-desable-line import/no-unresolved
 
 module.exports = merge(common, {
   mode: 'development',
